@@ -1,4 +1,5 @@
 import HeroShowcase from '@/components/sections/hero-showcase';
+import FeaturesGrid from '@/components/sections/features-grid';
 import { MainNav } from '@/components/layout/main-nav';
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
       <MainNav />
       <HeroShowcase />
+      <FeaturesGrid />
     </main>
   );
 }
