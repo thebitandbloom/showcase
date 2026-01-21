@@ -28,7 +28,7 @@ export default function HeroShowcase() {
 	const textRef = useRef(null);
 	const imageRef = useRef(null);
 
-	// Auto-cycle timer
+	/* // Auto-cycle timer
 	useGSAP(() => {
 		const timer = setInterval(() => {
 			const tl = gsap.timeline({
@@ -43,7 +43,7 @@ export default function HeroShowcase() {
 				duration: 0.8,
 				ease: "power2.inOut"
 			});
-		}, 5000);
+		}, 8000);
 		return () => clearInterval(timer);
 	}, { scope: containerRef });
 
@@ -53,12 +53,43 @@ export default function HeroShowcase() {
 			{ opacity: 0, y: 20 },
 			{ opacity: 1, y: 0, duration: 1, ease: "power2.out" }
 		);
-	}, { scope: containerRef, dependencies: [activeIndex] });
+	}, { scope: containerRef, dependencies: [activeIndex] }); */
+
+	// Auto-cycle timer
+	useGSAP(() => {
+		const tl = gsap.timeline({
+			repeat: -1,
+			defaults: { ease: "power2.inOut" }
+		});
+
+		tl.to([textRef.current, imageRef.current], {
+			opacity: 0,
+			y: 20,
+			duration: 0.8,
+			delay: 5, // 🟢 TUNING: Adjust this to change how long the slide stays visible
+		})
+			.call(() => {
+				// Update content while invisible
+				setActiveIndex((prev) => (prev + 1) % content.length);
+			})
+			.to([textRef.current, imageRef.current], {
+				opacity: 1,
+				y: 0,
+				duration: 1,
+				delay: 0.1, // Wait for React render
+				ease: "power2.out"
+			});
+
+		return () => {
+			tl.kill();
+		};
+	}, { scope: containerRef });
+
 
 	const current = content[activeIndex];
 
 	return (
-		<section ref={containerRef} className="relative h-[100svh] w-[100svw] overflow-hidden bg-background text-foreground grid grid-cols-1 md:grid-cols-2">
+		<section ref={containerRef} className="relative h-svh w-svw overflow-hidden bg-background text-foreground grid grid-cols-1 md:grid-cols-2">
 			{/* Left Column: Text */}
 			<div className="flex items-center justify-center p-12 md:p-24 relative z-10">
 				<div ref={textRef} className="max-w-xl space-y-6">
@@ -89,7 +120,7 @@ export default function HeroShowcase() {
 					<Image
 						src={current.image}
 						alt={current.headline}
-						fill
+						fill={true}
 						className="object-cover"
 						priority
 					/>
