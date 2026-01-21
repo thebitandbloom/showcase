@@ -27,11 +27,9 @@ export function MainNav() {
 						<NavigationMenuList>
 							{["Collections", "About", "Journal", "Contact"].map((item) => (
 								<NavigationMenuItem key={item}>
-									<Link href="#" legacyBehavior passHref>
-										<NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/20 data-[state=open]:bg-white/10`}>
-											{item}
-										</NavigationMenuLink>
-									</Link>
+									<NavigationMenuLink href="#" className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/20 data-[state=open]:bg-white/10`}>
+										{item}
+									</NavigationMenuLink>
 								</NavigationMenuItem>
 							))}
 						</NavigationMenuList>
