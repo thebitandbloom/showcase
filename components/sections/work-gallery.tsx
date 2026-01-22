@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { ArrowUpRight, X } from 'lucide-react';
+import './work-gallery.css';
 
 import {
 	Dialog,
@@ -131,7 +132,7 @@ export default function WorkGallery() {
 									<div className="absolute inset-0 z-20 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 										<div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
 											<span className="text-xs font-medium tracking-widest uppercase text-white/70 block mb-2">{project.category}</span>
-											<h3 className="text-2xl font-bold text-white flex items-center justify-between">
+											<h3 className="text-2xl font-bold text-white flex items-center justify-between wrap-break-word">
 												{project.title}
 												<ArrowUpRight className="w-5 h-5 text-white/70" />
 											</h3>
@@ -140,8 +141,8 @@ export default function WorkGallery() {
 								</div>
 							</DialogTrigger>
 
-							<DialogContent className="max-w-5xl bg-zinc-950 border-zinc-800 p-0 overflow-hidden !rounded-none">
-								<div className="grid grid-cols-1 md:grid-cols-2 h-[80vh] md:h-[600px]">
+							<DialogContent className="max-w-none md:max-w-5xl w-[90svw] bg-zinc-950 border-zinc-800 p-0 overflow-hidden !rounded-none">
+								<div className="grid grid-cols-1 md:grid-cols-2 h-auto max-h-[80vh] overflow-y-auto hide-scrollbar">
 									{/* Modal Image */}
 									<div className="relative h-64 md:h-full w-full bg-zinc-900">
 										<Image
@@ -159,7 +160,7 @@ export default function WorkGallery() {
 												<span className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500">{project.category}</span>
 												<span className="text-xs font-mono text-zinc-500">{project.year}</span>
 											</div>
-											<DialogTitle className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+											<DialogTitle className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight wrap-break-word">
 												{project.title}
 											</DialogTitle>
 											<DialogDescription className="text-lg text-zinc-400 leading-relaxed font-light">
