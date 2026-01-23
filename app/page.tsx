@@ -1,6 +1,7 @@
 import HeroShowcase from '@/components/sections/hero-showcase';
 import FeaturesGrid from '@/components/sections/features-grid';
 import WorkGallery from '@/components/sections/work-gallery';
+import ConciergeInquiry from '@/components/sections/concierge-inquiry';
 import { MainNav } from '@/components/layout/main-nav';
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroShowcase />
       <FeaturesGrid />
       <WorkGallery />
+      <ConciergeInquiry />
     </main>
   );
 }
