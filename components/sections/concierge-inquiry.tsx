@@ -43,7 +43,7 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(14, { message: "Please enter a complete phone number." }),
-  date: z.date({ required_error: "A consultation date is required." }),
+  date: z.date({ message: "A consultation date is required." }),
   projectType: z.string().min(1, { message: "Please select a project type." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
@@ -84,7 +84,17 @@ export default function ConciergeInquiry() {
     setIsReviewOpen(false);
     toast.success("Inquiry Sent Successfully", {
       description: "Our concierge will contact you within 24 hours.",
-      icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
+      duration: 2000,
+      position: "top-center",
+      style: {
+        background: "var(--foreground)",
+        border: "1px solid var(--border)",
+        color: "var(--background)",
+        borderRadius: "1rem",
+        padding: "1rem",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+      },
+      icon: <CheckCircle2 className="w-5 h-5 text-background" />,
     });
     form.reset();
   };
