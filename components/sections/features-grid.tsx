@@ -79,7 +79,7 @@ export default function FeaturesGrid() {
                     <span className="text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
                         Capabilities
                     </span>
-                    <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
+                    <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
                         Elevating the standard of digital excellence.
                     </h2>
                 </div>

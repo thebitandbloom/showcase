@@ -96,7 +96,7 @@ export default function HeroShowcase() {
 					<span className="text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground">
 						{current.kicker}
 					</span>
-					<h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight">
+					<h1 className="text-6xl md:text-8xl font-serif font-bold tracking-tighter leading-tight">
 						{current.headline}
 					</h1>
 					<p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">

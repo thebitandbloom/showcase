@@ -100,7 +100,7 @@ export default function WorkGallery() {
 						<span className="text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
 							Selected Works
 						</span>
-						<h2 className="text-4xl md:text-6xl font-bold tracking-tight">
+						<h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
 							Curated digital artifacts.
 						</h2>
 					</div>
@@ -160,7 +160,7 @@ export default function WorkGallery() {
 												<span className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500">{project.category}</span>
 												<span className="text-xs font-mono text-zinc-500">{project.year}</span>
 											</div>
-											<DialogTitle className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight wrap-break-word">
+											<DialogTitle className="text-4xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight wrap-break-word">
 												{project.title}
 											</DialogTitle>
 											<DialogDescription className="text-lg text-zinc-400 leading-relaxed font-light">
