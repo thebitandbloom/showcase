@@ -84,7 +84,7 @@ export default function ConciergeInquiry() {
     setIsReviewOpen(false);
     toast.success("Inquiry Sent Successfully", {
       description: "Our concierge will contact you within 24 hours.",
-      duration: 2000,
+      duration: 20000,
       position: "top-center",
       style: {
         background: "var(--foreground)",
@@ -93,6 +93,10 @@ export default function ConciergeInquiry() {
         borderRadius: "1rem",
         padding: "1rem",
         boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+      },
+      action: {
+        label: "Close",
+        onClick: () => toast.dismiss(),
       },
       icon: <CheckCircle2 className="w-5 h-5 text-background" />,
     });
