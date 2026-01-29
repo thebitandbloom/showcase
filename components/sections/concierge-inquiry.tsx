@@ -76,6 +76,17 @@ export default function ConciergeInquiry() {
     setIsReviewOpen(true);
   };
 
+  const onError = (errors: any) => {
+    const first = Object.keys(errors || {})[0]
+    if (first) {
+      try {
+        form.setFocus(first as any)
+      } catch (e) {
+        // ignore if focus cannot be set
+      }
+    }
+  };
+
   const handleConfirmOrder = async () => {
     setIsSubmitting(true);
     // Simulate API call
@@ -117,7 +128,7 @@ export default function ConciergeInquiry() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-24 md:py-40 bg-black border-t border-white/5" id="inquiry">
+    <section ref={containerRef} className="py-24 md:py-40 bg-background border-t border-foreground/5" id="inquiry">
       <div className="max-w-4xl mx-auto px-6">
         <div className="form-container">
           <div className="mb-16 text-center">
@@ -133,7 +144,7 @@ export default function ConciergeInquiry() {
           </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit, onError)} className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Name */}
                 <FormField
@@ -143,7 +154,7 @@ export default function ConciergeInquiry() {
                     <FormItem>
                       <FormLabel className="uppercase tracking-widest text-xs font-semibold text-zinc-500">Full Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="JEAN DOE" {...field} className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-white transition-all rounded-none py-6 uppercase" />
+                        <Input placeholder="JEAN DOE" {...field} className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-foreground transition-all rounded-none py-6 uppercase" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -158,7 +169,7 @@ export default function ConciergeInquiry() {
                     <FormItem>
                       <FormLabel className="uppercase tracking-widest text-xs font-semibold text-zinc-500">Email Address</FormLabel>
                       <FormControl>
-                        <Input placeholder="HELLO@AGENCY.COM" {...field} className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-white transition-all rounded-none py-6 uppercase" />
+                        <Input placeholder="HELLO@AGENCY.COM" {...field} className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-foreground transition-all rounded-none py-6 uppercase" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -181,7 +192,7 @@ export default function ConciergeInquiry() {
                           placeholder="(00) 00000-0000"
                           value={field.value}
                           onAccept={(value) => field.onChange(value)}
-                          className="flex h-12 w-full border border-zinc-800 bg-zinc-950 px-3 py-6 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-600 focus-visible:outline-none focus:ring-1 focus:ring-white transition-all rounded-none uppercase disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-12 w-full border border-zinc-800 bg-zinc-950 px-3 py-6 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-600 focus-visible:outline-none focus:ring-1 focus:ring-foreground transition-all rounded-none uppercase disabled:cursor-not-allowed disabled:opacity-50"
                         />
                       </FormControl>
                       <FormMessage />
@@ -205,7 +216,7 @@ export default function ConciergeInquiry() {
                             className={cn(
                               "px-6 py-2 border text-xs uppercase tracking-widest transition-all duration-300",
                               field.value === type
-                                ? "bg-white text-black border-white"
+                                ? "bg-foreground text-background border-foreground"
                                 : "bg-transparent text-zinc-400 border-zinc-800 hover:border-zinc-500"
                             )}
                           >
@@ -231,7 +242,7 @@ export default function ConciergeInquiry() {
                             <Button
                               variant={"outline"}
                               className={cn(
-                                "w-full md:w-[280px] py-6 bg-zinc-950 border-zinc-800 rounded-none text-left font-normal uppercase tracking-widest text-xs",
+                                "w-full md:w-70 py-6 bg-zinc-950 border-zinc-800 rounded-none text-left font-normal uppercase tracking-widest text-xs",
                                 !field.value && "text-zinc-600"
                               )}
                             >
@@ -249,7 +260,7 @@ export default function ConciergeInquiry() {
                               date < new Date() || date < new Date("1900-01-01")
                             }
                             initialFocus
-                            className="text-white"
+                            className="text-foreground"
                           />
                         </PopoverContent>
                       </Popover>
@@ -268,7 +279,7 @@ export default function ConciergeInquiry() {
                       <FormControl>
                         <Textarea
                           placeholder="DESCRIBE YOUR VISION..."
-                          className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-white transition-all rounded-none min-h-[150px] uppercase"
+                          className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-foreground transition-all rounded-none min-h-37.5 uppercase"
                           {...field}
                         />
                       </FormControl>
@@ -279,7 +290,7 @@ export default function ConciergeInquiry() {
               </div>
 
               <div className="flex justify-center mt-12">
-                <Button type="submit" className="px-12 py-8 bg-white text-black hover:bg-zinc-200 rounded-none uppercase tracking-[0.3em] text-xs font-bold transition-all duration-300">
+                <Button type="submit" className="px-12 py-8 bg-foreground text-background hover:bg-zinc-200 rounded-none uppercase tracking-[0.3em] text-xs font-bold transition-all duration-300">
                   Review Inquiry
                 </Button>
               </div>
@@ -290,7 +301,7 @@ export default function ConciergeInquiry() {
 
       {/* Review Dialog */}
       <Dialog open={isReviewOpen} onOpenChange={setIsReviewOpen}>
-        <DialogContent className="bg-zinc-950 border-zinc-800 text-white max-w-xl rounded-none">
+        <DialogContent className="bg-zinc-950 border-zinc-800 text-foreground max-w-xl rounded-none">
           <DialogHeader>
             <DialogTitle className="text-3xl font-serif font-bold mb-2">Review Your Inquiry</DialogTitle>
             <DialogDescription className="text-zinc-500">
@@ -331,7 +342,7 @@ export default function ConciergeInquiry() {
             <Button variant="outline" onClick={() => setIsReviewOpen(false)} className="rounded-none border-zinc-800 hover:bg-zinc-900 uppercase text-xs tracking-widest">
               Back
             </Button>
-            <Button onClick={handleConfirmOrder} disabled={isSubmitting} className="rounded-none bg-white text-black hover:bg-zinc-200 uppercase text-xs tracking-widest min-w-[140px]">
+            <Button onClick={handleConfirmOrder} disabled={isSubmitting} className="rounded-none bg-foreground text-background hover:bg-zinc-200 uppercase text-xs tracking-widest min-w-35">
               {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : "Finalize Inquiry"}
             </Button>
           </DialogFooter>

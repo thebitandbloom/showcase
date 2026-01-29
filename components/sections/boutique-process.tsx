@@ -90,7 +90,7 @@ export default function BoutiqueProcess() {
   return (
     <section
       ref={containerRef}
-      className="relative py-32 bg-black text-white overflow-hidden"
+      className="relative py-32 bg-background text-foreground overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -106,12 +106,12 @@ export default function BoutiqueProcess() {
         {/* Timeline Container */}
         <div className="relative">
           {/* Vertical Central Line (Background) */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[1px] h-full bg-zinc-800" />
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 w-px h-full bg-zinc-800" />
 
           {/* Animated Growing Line */}
           <div
             ref={lineRef}
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[1px] bg-white z-10 shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-px bg-foreground z-10 shadow-[0_0_15px_rgba(255,255,255,0.5)]"
           />
 
           {/* Steps */}
@@ -137,7 +137,7 @@ export default function BoutiqueProcess() {
                     {step.title}
                   </h3>
                   <p className="text-zinc-400 text-lg md:text-xl font-light leading-relaxed">
-                    <span className="text-white font-medium italic mr-2">
+                    <span className="text-foreground font-medium italic mr-2">
                       {step.tagline}
                     </span>
                     {step.description}
@@ -146,7 +146,7 @@ export default function BoutiqueProcess() {
 
                 {/* Dot on the line */}
                 <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center p-4">
-                  <div className="step-dot w-3 h-3 bg-white rounded-full z-20 shadow-[0_0_10px_white]" />
+                  <div className="step-dot w-3 h-3 bg-foreground rounded-full z-20 shadow-[0_0_10px_foreground]" />
                 </div>
 
                 {/* Spacer for the other side on desktop */}

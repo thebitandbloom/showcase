@@ -70,7 +70,7 @@ export default function FeaturesGrid() {
   return (
     <section
       ref={containerRef}
-      className="py-24 md:py-40 bg-black border-t border-white/5"
+      className="w-full py-24 md:py-40 bg-background border-t border-foreground/5"
       id="features"
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -97,13 +97,13 @@ export default function FeaturesGrid() {
                 e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
                 e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
               }}
-              className="group relative p-8 bg-zinc-950 border border-white/5 hover:border-white/20 transition-all duration-500 rounded-lg overflow-hidden opacity-0 translate-y-12"
+              className="group relative p-8 bg-zinc-950 border border-foreground/5 hover:border-foreground/20 transition-all duration-500 rounded-lg overflow-hidden opacity-0 translate-y-12"
             >
               {/* Hover Glow Effect */}
-              <div className="absolute inset-0 bg-radial-[circle_at_var(--mouse-x,50%)_var(--mouse-y,50%)] from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 bg-radial-[circle_at_var(--mouse-x,50%)_var(--mouse-y,50%)] from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
               <div className="relative z-10">
-                <div className="mb-6 inline-flex p-3 rounded-full bg-white/5 text-white group-hover:bg-white group-hover:text-black transition-colors duration-500">
+                <div className="mb-6 inline-flex p-3 rounded-full bg-foreground/5 text-foreground group-hover:bg-foreground group-hover:text-background transition-colors duration-500">
                   <feature.icon size={24} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 tracking-tight">
@@ -115,7 +115,7 @@ export default function FeaturesGrid() {
               </div>
 
               {/* Subtle Bottom Accent */}
-              <div className="absolute bottom-0 left-0 h-px w-0 bg-white group-hover:w-full transition-all duration-700" />
+              <div className="absolute bottom-0 left-0 h-px w-0 bg-foreground group-hover:w-full transition-all duration-700" />
             </div>
           ))}
         </div>

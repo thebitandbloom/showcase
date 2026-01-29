@@ -49,7 +49,7 @@ export default function AboutPhilosophy() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex flex-col md:flex-row bg-black overflow-hidden"
+      className="relative min-h-screen flex flex-col md:flex-row bg-background overflow-hidden"
     >
       {/* Left Side: Image */}
       <div className="w-full md:w-1/2 h-[50vh] md:h-screen overflow-hidden relative">
@@ -61,7 +61,7 @@ export default function AboutPhilosophy() {
             className="object-cover grayscale brightness-75 transition-all duration-700 hover:grayscale-0 hover:brightness-100"
             priority
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-background/20" />
         </div>
       </div>
 
@@ -72,7 +72,7 @@ export default function AboutPhilosophy() {
             <span className="text-zinc-500 uppercase tracking-[0.3em] text-xs font-semibold block reveal-line">
               Established 2024
             </span>
-            <h2 className="text-4xl md:text-6xl font-playfair italic text-white leading-tight reveal-line">
+            <h2 className="text-4xl md:text-6xl font-playfair italic text-foreground leading-tight reveal-line">
               Crafting Digital Artifacts <br /> for the Modern Connossieur.
             </h2>
           </div>

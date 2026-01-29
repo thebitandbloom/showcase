@@ -24,9 +24,14 @@ const content = [
 
 export default function HeroShowcase() {
 	const [activeIndex, setActiveIndex] = useState(0);
-	const containerRef = useRef(null);
-	const textRef = useRef(null);
-	const imageRef = useRef(null);
+	const containerRef = useRef<HTMLElement | null>(null);
+	const textRef = useRef<HTMLDivElement | null>(null);
+	const imageRef = useRef<HTMLDivElement | null>(null);
+
+	// Respect user's reduced motion preference
+ 	const prefersReducedMotion = typeof window !== 'undefined' &&
+ 		window.matchMedia &&
+ 		window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	/* // Auto-cycle timer
 	useGSAP(() => {
@@ -55,8 +60,10 @@ export default function HeroShowcase() {
 		);
 	}, { scope: containerRef, dependencies: [activeIndex] }); */
 
-	// Auto-cycle timer
+	// Auto-cycle timer (disabled for users who prefer reduced motion)
 	useGSAP(() => {
+		if (prefersReducedMotion) return
+
 		const tl = gsap.timeline({
 			repeat: -1,
 			defaults: { ease: "power2.inOut" }
@@ -64,19 +71,18 @@ export default function HeroShowcase() {
 
 		tl.to([textRef.current, imageRef.current], {
 			opacity: 0,
-			y: 20,
+			transform: 'translateY(20px)',
 			duration: 0.8,
-			delay: 5, // 🟢 TUNING: Adjust this to change how long the slide stays visible
+			delay: 5,
 		})
 			.call(() => {
-				// Update content while invisible
 				setActiveIndex((prev) => (prev + 1) % content.length);
 			})
 			.to([textRef.current, imageRef.current], {
 				opacity: 1,
-				y: 0,
+				transform: 'translateY(0px)',
 				duration: 1,
-				delay: 0.1, // Wait for React render
+				delay: 0.1,
 				ease: "power2.out"
 			});
 
@@ -91,7 +97,7 @@ export default function HeroShowcase() {
 	return (
 		<section ref={containerRef} className="relative h-svh w-svw overflow-hidden bg-background text-foreground grid grid-cols-1 md:grid-cols-2">
 			{/* Left Column: Text */}
-			<div className="flex items-center justify-center p-12 md:p-24 relative z-10">
+			<div className="flex items-center justify-center md:justify-start p-12 md:p-24 relative z-10">
 				<div ref={textRef} className="max-w-xl space-y-6">
 					<span className="text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground">
 						{current.kicker}
@@ -102,7 +108,7 @@ export default function HeroShowcase() {
 					<p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
 						{current.description}
 					</p>
-					<button className="mt-8 px-8 py-4 border border-white/20 hover:bg-white hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-medium cursor-pointer">
+					<button className="mt-8 px-8 py-4 border border-foreground/20 hover:bg-foreground hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-medium cursor-pointer">
 						Discover Collection
 					</button>
 				</div>
@@ -114,7 +120,8 @@ export default function HeroShowcase() {
 					ref={imageRef}
 					className="absolute inset-0 w-full h-full"
 					style={{
-						clipPath: "polygon(15% 0, 100% 0, 100% 100%, 0% 100%)"
+						clipPath: "polygon(15% 0, 100% 0, 100% 100%, 0% 100%)",
+						willChange: 'transform, opacity'
 					}}
 				>
 					<Image
@@ -123,8 +130,9 @@ export default function HeroShowcase() {
 						fill={true}
 						className="object-cover"
 						priority
+						sizes="(min-width: 768px) 50vw, 100vw"
 					/>
-					<div className="absolute inset-0 bg-black/20" />
+					<div className="absolute inset-0 bg-black/20" aria-hidden />
 				</div>
 			</div>
 		</section>
