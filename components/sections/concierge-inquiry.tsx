@@ -115,6 +115,9 @@ export default function ConciergeInquiry() {
   };
 
   useGSAP(() => {
+    gsap.set("form-container", { opacity: 0, y: 40 });
+    gsap.set(".form-container", { visibility: "visible" });
+
     gsap.from(".form-container", {
       opacity: 0,
       y: 40,
@@ -130,7 +133,7 @@ export default function ConciergeInquiry() {
   return (
     <section ref={containerRef} className="py-24 md:py-40 bg-background border-t border-foreground/5" id="inquiry">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="form-container">
+        <div className="form-container invisible">
           <div className="mb-16 text-center">
             <span className="text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
               Concierge Service
@@ -290,9 +293,9 @@ export default function ConciergeInquiry() {
               </div>
 
               <div className="flex justify-center mt-12">
-                <Button type="submit" className="px-12 py-8 bg-foreground text-background hover:bg-zinc-200 rounded-none uppercase tracking-[0.3em] text-xs font-bold transition-all duration-300">
+                <button type="submit" className="px-8 py-4 border border-foreground/20 bg-foreground text-background hover:bg-zinc-200 transition-colors duration-300 uppercase tracking-widest text-sm font-medium cursor-pointer">
                   Review Inquiry
-                </Button>
+                </button>
               </div>
             </form>
           </Form>
@@ -303,7 +306,7 @@ export default function ConciergeInquiry() {
       <Dialog open={isReviewOpen} onOpenChange={setIsReviewOpen}>
         <DialogContent className="bg-zinc-950 border-zinc-800 text-foreground max-w-xl rounded-none">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-serif font-bold mb-2">Review Your Inquiry</DialogTitle>
+            <DialogTitle className="text-3xl font-sans italic font-bold mb-2">Review Your Inquiry</DialogTitle>
             <DialogDescription className="text-zinc-500">
               Please verify your information before we finalize the request.
             </DialogDescription>

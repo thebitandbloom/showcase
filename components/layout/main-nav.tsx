@@ -12,6 +12,19 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "@/components/ui/sheet"
 
+type NavItem = {
+	label: string
+	href: string
+}
+
+const navItems: NavItem[] = [
+	{ label: "home", href: "/" },
+	{ label: "About", href: "/about" },
+	{ label: "Process", href: "/process" },
+	{ label: "Work", href: "/work" },
+	{ label: "Contact", href: "/contact" },
+]
+
 export function MainNav() {
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 glass">
@@ -25,10 +38,10 @@ export function MainNav() {
 				<div className="hidden md:flex items-center gap-8">
 					<NavigationMenu>
 						<NavigationMenuList>
-							{["Collections", "About", "Journal", "Contact"].map((item) => (
-								<NavigationMenuItem key={item}>
-									<NavigationMenuLink href="#" className={`${navigationMenuTriggerStyle()} bg-transparent text-foreground hover:bg-foreground/10 hover:text-foreground focus:bg-foreground/10 focus:text-foreground data-active:bg-foreground/20 data-[state=open]:bg-foreground/10`}>
-										{item}
+							{navItems.map((n) => (
+								<NavigationMenuItem key={n.label}>
+									<NavigationMenuLink href={n.href} className={`${navigationMenuTriggerStyle()} bg-transparent text-foreground hover:bg-foreground/10 hover:text-foreground focus:bg-foreground/10 focus:text-foreground data-active:bg-foreground/20 data-[state=open]:bg-foreground/10`}>
+										{n.label}
 									</NavigationMenuLink>
 								</NavigationMenuItem>
 							))}
@@ -56,9 +69,9 @@ export function MainNav() {
 								<SheetTitle className="text-foreground text-left uppercase tracking-widest">Menu</SheetTitle>
 							</SheetHeader>
 							<nav className="flex flex-col gap-6 mt-12">
-								{["Collections", "About", "Journal", "Contact", "Login"].map((item) => (
-									<Link key={item} href="#" className="text-2xl text-foreground font-light hover:text-foreground/70 transition-colors uppercase tracking-tight">
-										{item}
+								{navItems.map((n) => (
+									<Link key={n.label} href={n.href} className="text-2xl text-foreground font-light hover:text-foreground/70 transition-colors uppercase tracking-tight">
+										{n.label}
 									</Link>
 								))}
 							</nav>

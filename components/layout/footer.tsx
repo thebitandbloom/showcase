@@ -32,7 +32,7 @@ export default function Footer({
                 </div>
               )}
               <div>
-                <a href={brand.url ?? '#'} className="font-semibold text-foreground text-lg hover:underline">
+                <a href={brand.url ?? '#'} className="font-semibold uppercase text-foreground text-lg hover:underline">
                   {brand.name}
                 </a>
                 {brand.description && <p className="mt-2 text-sm text-zinc-400">{brand.description}</p>}
