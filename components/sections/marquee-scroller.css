@@ -10,6 +10,12 @@
 }
 
 .marquee-track {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-items {
   display: flex;
   align-items: center;
   gap: 2.5rem;
@@ -17,7 +23,7 @@
   animation: marquee-left var(--marquee-duration, 36s) linear infinite;
 }
 
-.marquee-container[data-direction="right"] .marquee-track {
+.marquee-container[data-direction="right"] .marquee-track .marquee-items{
   animation-name: marquee-right;
 }
 
@@ -25,18 +31,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 120px;
+  max-width: 120px;
   opacity: 0.9;
 }
 
 @keyframes marquee-left {
-  from { transform: translateX(0%); }
-  to { transform: translateX(calc(-50% + 1.25rem)); }
+  from { transform: translateX(0); }
+  /* Use the runtime-measured --marquee-shift (fallback to 50% until JS sets it) */
+  /* to { transform: translateX(calc(-1 * var(--marquee-shift, 50%))); } */
+  to { transform: translateX(calc(-50% - 1.25rem)); }
 }
 
 @keyframes marquee-right {
-  from { transform: translateX(calc(-50% + 1.25rem)); }
-  to { transform: translateX(0%); }
+  /* from { transform: translateX(calc(-1 * var(--marquee-shift, 50%))); } */
+  from { transform: translateX(calc(-50% - 1.25rem)); }
+  to { transform: translateX(0); }
 }
 
 /* Respect reduced motion */

@@ -3,7 +3,7 @@ import AboutPhilosophy from '@/components/sections/about-philosophy';
 import BoutiqueProcess from '@/components/sections/boutique-process';
 import FeaturesGrid from '@/components/sections/features-grid';
 import WorkGallery from '@/components/sections/work-gallery';
-import MarqueeScroller from '@/components/sections/marquee-scroller';
+import MarqueeScrollerAternative from '@/components/sections/marquee-scroller-alternative';
 import ConciergeInquiry from '@/components/sections/concierge-inquiry';
 import MainNav from '@/components/layout/main-nav';
 import Footer from '@/components/layout/footer';
@@ -17,7 +17,7 @@ export default function Home() {
       <BoutiqueProcess />
       <FeaturesGrid />
       <WorkGallery />
-      <MarqueeScroller />
+      <MarqueeScrollerAternative />
       <ConciergeInquiry />
       <Footer />
     </main>
