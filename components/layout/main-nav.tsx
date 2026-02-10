@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
 	{ label: "Contact", href: "/contact" },
 ]
 
-export function MainNav() {
+export default function MainNav() {
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 glass">
 			<div className="container mx-auto px-6 h-20 flex items-center justify-between">
