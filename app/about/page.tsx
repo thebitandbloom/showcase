@@ -4,7 +4,7 @@ import BoutiqueProcess from '@/components/sections/boutique-process';
 import FeaturesGrid from '@/components/sections/features-grid';
 import WorkGallery from '@/components/sections/work-gallery';
 import ConciergeInquiry from '@/components/sections/concierge-inquiry';
-import { MainNav } from '@/components/layout/main-nav';
+import MainNav from '@/components/layout/main-nav';
 import Footer from '@/components/layout/footer';
 
 export default function Home() {

@@ -52,6 +52,7 @@ export default function BoutiqueProcess() {
       });
 
       // Growing line animation
+      gsap.set(lineRef.current, { height: 0, width: 2 });
       gsap.fromTo(
         lineRef.current,
         { height: 0 },
