@@ -131,6 +131,7 @@ export default function HeroShowcase() {
 						className="object-cover"
 						priority
 						sizes="(min-width: 768px) 50vw, 100vw"
+						data-hero
 					/>
 					<div className="absolute inset-0 bg-background/20" aria-hidden />
 				</div>

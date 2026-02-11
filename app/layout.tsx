@@ -36,6 +36,7 @@ export const metadata: Metadata = {
 };
 
 import { Toaster } from "@/components/ui/sonner";
+import { LayoutLoaderProvider } from "@/components/layout/layout-loader-provider";
 
 export default function RootLayout({
   children,
@@ -45,8 +46,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${montserrat.variable} ${zalandoSans.variable} font-sans antialiased`}>
       <body>
-        {children}
-        <Toaster position="top-center" richColors />
+        <LayoutLoaderProvider>
+          {children}
+          <Toaster position="top-center" richColors />
+        </LayoutLoaderProvider>
       </body>
     </html>
   );
