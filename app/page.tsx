@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
+    <main className="min-h-screen flex flex-col space-y-56 bg-background text-foreground selection:bg-foreground selection:text-background">
       <MainNav />
       <HeroShowcase />
       <AboutPhilosophy />

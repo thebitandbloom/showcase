@@ -104,7 +104,7 @@ export default function WorkGallery() {
               Curated digital artifacts.
             </h2>
           </div>
-          <p className="max-w-md text-muted-foreground leading-relaxed text-sm md:text-right">
+          <p className="max-w-md text-muted-foreground leading-relaxed text-base md:text-right">
             A retrospective of our defining moments in design, strategy, and technical execution.
           </p>
         </div>
@@ -135,7 +135,7 @@ export default function WorkGallery() {
                   <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                       <span className="text-left text-xs font-medium tracking-widest uppercase text-foreground/70 block mb-2">{project.category}</span>
-                      <h3 className="text-2xl font-bold text-foreground flex items-center justify-between wrap-break-word">
+                      <h3 className="text-2xl font-bold tracking-tighter text-foreground flex items-center justify-between wrap-break-word">
                         {project.title}
                         <ArrowUpRight className="w-5 h-5 text-foreground/70" />
                       </h3>
@@ -163,7 +163,7 @@ export default function WorkGallery() {
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500">{project.category}</span>
                         <span className="text-xs font-mono text-zinc-500">{project.year}</span>
                       </div>
-                      <DialogTitle className="text-4xl md:text-5xl font-sans font-normal tracking-tight text-foreground mb-6 leading-tight wrap-anywhere">
+                      <DialogTitle className="text-4xl md:text-5xl font-sans font-normal tracking-tighter text-foreground mb-6 leading-tight wrap-anywhere">
                         {project.title}
                       </DialogTitle>
                       <DialogDescription className="text-lg text-zinc-400 leading-relaxed font-light">

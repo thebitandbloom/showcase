@@ -146,7 +146,7 @@ export default function ConciergeInquiry() {
             <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight mb-6">
               Start Your Journey
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
               Experience a tailored consultation where we define the future of your brand. Fill in your details below to initiate our exclusive process.
             </p>
           </div>

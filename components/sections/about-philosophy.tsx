@@ -128,7 +128,7 @@ export default function AboutPhilosophy() {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row w-full h-full min-h-svh items-center justify-center gap-1 md:gap-2">
+        <div className="flex flex-col space-y-12 md:space-y-0 md:flex-row w-full h-full min-h-svh items-center justify-center gap-1 md:gap-2">
           {/* Left Side: Image */}
           <div className="w-full md:w-1/2 overflow-hidden relative h-96 md:h-full min-h-svh">
             <div ref={imageRef} className="absolute inset-0 opacity-0 -translate-y-1/2 md:-translate-y-1/2 transition-transform duration-700 will-change-transform">

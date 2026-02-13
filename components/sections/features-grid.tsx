@@ -98,7 +98,7 @@ export default function FeaturesGrid() {
                 e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
                 e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
               }}
-              className="group relative p-8 bg-zinc-950 border border-foreground/5 hover:border-foreground/20 transition-all duration-500 rounded-lg overflow-hidden opacity-0 translate-y-12"
+              className="group relative p-8 bg-zinc-950 border border-foreground/5 hover:border-foreground/20 transition-all duration-500 rounded-none overflow-hidden opacity-0 translate-y-12"
             >
               {/* Hover Glow Effect */}
               <div className="absolute inset-0 bg-radial-[circle_at_var(--mouse-x,50%)_var(--mouse-y,50%)] from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -107,10 +107,10 @@ export default function FeaturesGrid() {
                 <div className="mb-6 inline-flex p-3 rounded-full bg-foreground/5 text-foreground group-hover:bg-foreground group-hover:text-background transition-colors duration-500">
                   <feature.icon size={24} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-semibold mb-4 tracking-tight">
+                <h3 className="text-xl font-semibold mb-4 tracking-tighter">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm">
+                <p className="text-muted-foreground leading-relaxed text-base">
                   {feature.description}
                 </p>
               </div>

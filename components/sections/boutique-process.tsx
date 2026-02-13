@@ -172,7 +172,7 @@ export default function BoutiqueProcess(props: ScrollTriggerConfig) {
 
         {/* Intro Header */}
         <div ref={introRef} className="text-center mb-32 space-y-4 translate-y-8 opacity-0">
-          <h2 className="text-4xl md:text-6xl font-sans font-normal tracking-tight italic">
+          <h2 className="text-4xl md:text-6xl font-sans font-normal tracking-tighter italic">
             The Boutique Process
           </h2>
           <p className="text-zinc-500 uppercase tracking-[0.4em] text-sm">
