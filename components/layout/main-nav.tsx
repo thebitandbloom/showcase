@@ -30,7 +30,7 @@ export default function MainNav() {
 		<header className="fixed top-0 left-0 right-0 z-50 glass">
 			<div className="container mx-auto px-6 h-20 flex items-center justify-between">
 				{/* Logo */}
-				<Link href="/" style={{ fontFamily: 'var(--font-zalando-sans)' }} className="text-2xl font-extrabold tracking-wide uppercase text-foreground">
+				<Link href="/" style={{ fontFamily: 'var(--font-expanded-sans)' }} className="text-2xl font-extrabold tracking-wide uppercase text-foreground">
 					Vøid
 				</Link>
 
