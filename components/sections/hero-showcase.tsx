@@ -98,11 +98,11 @@ export default function HeroShowcase() {
 		<section ref={containerRef} className="relative h-svh w-svw overflow-hidden bg-background text-foreground grid grid-cols-1 md:grid-cols-2">
 			{/* Left Column: Text */}
 			<div className="flex items-center justify-center md:justify-start p-12 md:p-24 relative z-10">
-				<div ref={textRef} className="max-w-xl space-y-6 wrap-anywhere">
+				<div ref={textRef} className="max-w-xl min-w-96 space-y-6 wrap-anywhere">
 					<span className="text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground">
 						{current.kicker}
 					</span>
-					<h1 className="text-6xl md:text-8xl font-serif font-bold tracking-tighter leading-tight wrap-anywhere">
+					<h1 className="text-6xl md:text-8xl font-serif italic font-bold tracking-tighter leading-tight wrap-anywhere">
 						{current.headline}
 					</h1>
 					<p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
