@@ -114,7 +114,7 @@ export default function ConciergeInquiry() {
         label: "Close",
         onClick: () => toast.dismiss(),
       },
-      icon: <CheckCircle2 className="w-5 h-5 text-background" />,
+      // icon: <CheckCircle2 className="w-5 h-5 text-background" />,
     });
     form.reset();
   };
@@ -176,6 +176,9 @@ export default function ConciergeInquiry() {
                             focus-visible:ring-ring/50!
                             focus-visible:ring-[3px]!
                             focus-visible:outline-none
+                            focus-visible:bg-zinc-900! 
+                            hover:bg-zinc-900! 
+                            hover:border-zinc-500!
                             transition-all 
                             rounded-none 
                             py-6 
@@ -210,6 +213,9 @@ export default function ConciergeInquiry() {
                             focus-visible:ring-ring/50!
                             focus-visible:ring-[3px]!
                             focus-visible:outline-none
+                            focus-visible:bg-zinc-900! 
+                            hover:bg-zinc-900! 
+                            hover:border-zinc-500!
                             transition-all 
                             rounded-none 
                             py-6 
@@ -247,7 +253,7 @@ export default function ConciergeInquiry() {
                             bg-zinc-950 
                             px-3 py-6 
                             .text-sm 
-                            placeholder:text-zinc-600 
+                            placeholder:text-zinc-400 
                             outline-0
                             focus:outline-1 
                             focus:outline-foreground
@@ -256,6 +262,9 @@ export default function ConciergeInquiry() {
                             focus-visible:ring-ring/50!
                             focus-visible:ring-[3px]!
                             focus-visible:outline-none
+                            focus-visible:bg-zinc-900! 
+                            hover:bg-zinc-900! 
+                            hover:border-zinc-500!
                             aria-invalid:ring-destructive/20 
                             aria-invalid:border-destructive
                             dark:aria-invalid:ring-destructive/40 
@@ -300,7 +309,7 @@ export default function ConciergeInquiry() {
                               "px-6 py-2 border text-xs uppercase tracking-widest transition-all duration-300",
                               field.value === type
                                 ? "bg-foreground text-background border-foreground"
-                                : "bg-transparent text-zinc-400 border-zinc-800 hover:border-zinc-500"
+                                : "bg-transparent text-zinc-400 border-zinc-800 focus-visible:bg-zinc-900! hover:bg-zinc-900! hover:border-zinc-500!"
                             )}
                           >
                             {type}
@@ -325,16 +334,17 @@ export default function ConciergeInquiry() {
                             <Button
                               variant={"outline"}
                               className={cn(
-                                "w-full md:w-70 py-6 bg-zinc-950 border-zinc-800 rounded-none text-left font-normal uppercase tracking-widest .text-xs",
-                                !field.value && "text-zinc-600" && 
+                                "w-full md:w-70 py-6 bg-zinc-950 border-zinc-800 rounded-none text-left font-normal uppercase tracking-widest text-xs",
                                 `
-                                  hover:border-zinc-800!
+                                  hover:border-zinc-500!
+                                  hover:bg-zinc-900!
                                   active:border-zinc-800!
-                                `
+                                `,
+                                !field.value && "text-zinc-400"
                               )}
                             >
                               {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                              <CalendarIcon className="ml-auto h-4 w-full opacity-50" />
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
@@ -377,6 +387,9 @@ export default function ConciergeInquiry() {
                             focus-visible:ring-ring/50!
                             focus-visible:ring-[3px]!
                             focus-visible:outline-none
+                            focus-visible:bg-zinc-900!
+                            hover:bg-zinc-900!
+                            hover:border-zinc-500!
                             transition-all 
                             rounded-none 
                             min-h-37.5 
@@ -391,7 +404,7 @@ export default function ConciergeInquiry() {
               </div>
 
               <div className="flex justify-center mt-12">
-                <button type="submit" className="px-8 py-4 border border-foreground/20 bg-foreground text-background hover:bg-zinc-200 transition-colors duration-300 uppercase tracking-widest text-sm font-medium cursor-pointer">
+                <button type="submit" className="px-8 py-4 border border-foreground/20 bg-foreground text-background hover:bg-zinc-300 transition-colors duration-300 uppercase tracking-widest text-sm font-medium cursor-pointer">
                   Review Inquiry
                 </button>
               </div>
@@ -404,8 +417,8 @@ export default function ConciergeInquiry() {
       <Dialog open={isReviewOpen} onOpenChange={setIsReviewOpen}>
         <DialogContent className="bg-zinc-950 border-zinc-800 text-foreground max-w-xl rounded-none">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-sans font-normal tracking-tight mb-2">Review Your Inquiry</DialogTitle>
-            <DialogDescription className="text-zinc-500">
+            <DialogTitle className="text-3xl font-sans font-normal tracking-tighter mb-2">Review Your Inquiry</DialogTitle>
+            <DialogDescription className="text-zinc-500 text-base">
               Please verify your information before we finalize the request.
             </DialogDescription>
           </DialogHeader>

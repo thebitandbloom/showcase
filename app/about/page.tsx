@@ -9,7 +9,7 @@ import Footer from '@/components/layout/footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col space-y-56 bg-background text-foreground selection:bg-foreground selection:text-background">
+    <main className="min-h-screen flex flex-col space-y-32 bg-background text-foreground selection:bg-foreground selection:text-background">
       <h1 className="text-9xl font-extrabold italic font-serif text-muted-foreground opacity-20 w-full overflow-hidden">CLASSICNOIRFASHIONTEXTSHAPE</h1>
       <MainNav />
       <AboutPhilosophy />
