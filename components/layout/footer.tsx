@@ -35,7 +35,7 @@ export default function Footer({
                 <a href={brand.url ?? '#'} style={{ fontFamily: 'var(--font-zalando-sans)' }} className="font-extrabold uppercase text-foreground text-lg hover:underline">
                   {brand.name}
                 </a>
-                {brand.description && <p className="mt-2 text-sm text-zinc-400">{brand.description}</p>}
+                {brand.description && <p className="mt-2 text-base text-zinc-400">{brand.description}</p>}
               </div>
             </div>
 

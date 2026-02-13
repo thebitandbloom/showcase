@@ -4,41 +4,41 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { he } from "date-fns/locale";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutPhilosophy() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const ctx = gsap.context(() => {
-      // Header Animation
-      gsap.to(".about-header", {
+    const ctxabout = gsap.context(() => {
+      // Section Header Animation
+      gsap.to(headerRef.current, {
         y: 0,
         opacity: 1,
         duration: 1,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: ".about-header",
+          trigger: headerRef.current,
           start: "top 80%",
-          toggleActions: "play none none none"
         }
       });
 
       // Parallax effect on image
       gsap.to(imageRef.current, {
-        y: -50,
-        yPercent: 0,
+        y: 0,
+        yPercent: -10,
+        scale: 1.4,
         opacity: 1,
-        duration: 1.2,
-        ease: "power1.out",
+        duration: 1.5,
+        ease: "power4.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top bottom",
+          start: "top 80%",
           end: "bottom top",
           scrub: true,
         },
@@ -48,17 +48,14 @@ export default function AboutPhilosophy() {
       const lines = textRef.current?.querySelectorAll(".reveal-line");
       if (lines) {
         gsap.from(lines, {
-          y: 60,
+          y: 100,
           opacity: 0,
           duration: 0.8,
           stagger: 0.1,
           ease: "power4.out",
-          //delay: 0.1,
           scrollTrigger: {
-            trigger: textRef.current,
+            trigger: lines[0],
             start: "top 100%",
-            //toggleActions: "play none none none",
-            //scrub: true,
           },
         });
       }
@@ -74,7 +71,7 @@ export default function AboutPhilosophy() {
       if (words) {
         words.forEach((word, index) => {
           gsap.fromTo(word, {
-            y: index * lineHeight + 60,
+            y: index * lineHeight + 100,
             opacity: 0,
           }, {
             y: index * lineHeight,
@@ -84,10 +81,8 @@ export default function AboutPhilosophy() {
             ease: "power1.out",
             delay: index * 0.1,
             scrollTrigger: {
-              trigger: textRef.current,
-              start: "top 90%",
-              //toggleActions: "play none none none",
-              //scrub: true,
+              trigger: words[0],
+              start: "top 100%",
             },
           });
         });
@@ -103,24 +98,22 @@ export default function AboutPhilosophy() {
           scrollTrigger: {
             trigger: textRef.current,
             start: "top 90%",
-            //toggleActions: "play none none none",
-            //scrub: true,
           },
         });
       }
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => ctxabout.revert();
   });
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen py-24 md:py-40 flex flex-col bg-background overflow-hidden"
+      className="relative min-h-screen flex flex-col bg-background overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 w-full flex flex-col">
         {/* Section Header */}
-        <div className="about-header w-full mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8 opacity-0 translate-y-8">
+        <div ref={headerRef} className="w-full mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8 opacity-0 translate-y-8">
           <div className="max-w-2xl">
             <span className="text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
               About Us
@@ -129,16 +122,16 @@ export default function AboutPhilosophy() {
               Digital Craftsmanship.
             </h2>
           </div>
-          <p className="max-w-md text-muted-foreground leading-relaxed text-sm md:text-right">
+          <p className="max-w-md text-muted-foreground leading-relaxed text-base md:text-right">
             We don't just build software; we sculpt digital
             experiences that resonate with elegance and purpose.
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row w-full">
+        <div className="flex flex-col md:flex-row w-full h-full min-h-svh items-center justify-center gap-1 md:gap-2">
           {/* Left Side: Image */}
-          <div className="w-full md:w-1/2 h-[50vh] md:h-screen overflow-hidden relative">
-            <div ref={imageRef} className="absolute inset-0 scale-200 opacity-0 -translate-y-8 md:-translate-y-16 transition-transform duration-700 will-change-transform">
+          <div className="w-full md:w-1/2 overflow-hidden relative h-96 md:h-full min-h-svh">
+            <div ref={imageRef} className="absolute inset-0 opacity-0 -translate-y-1/2 md:-translate-y-1/2 transition-transform duration-700 will-change-transform">
               <Image
                 src="/about-philosophy.png" // We'll move the generated image here or reference it correctly
                 alt="Boutique Interior"
@@ -151,13 +144,13 @@ export default function AboutPhilosophy() {
           </div>
 
           {/* Right Side: Philosophy */}
-          <div className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-20 z-10">
+          <div className="w-full md:w-1/2 flex items-center justify-center px-8 md:px-20 z-10">
             <div ref={textRef} className="max-w-xl space-y-12">
               <div className="space-y-4">
                 <span className="text-zinc-500 uppercase tracking-[0.3em] text-xs font-semibold block reveal-line">
                   Established 2024
                 </span>
-                <h2 className="relative flex invisible text-4xl md:text-6xl font-sans italic text-foreground leading-16 reveal-line">
+                <h2 className="relative flex invisible text-6xl md:text-6xl font-sans italic text-foreground leading-16 reveal-line tracking-tighter">
                   <span className="absolute inline-flex">Crafting</span> 
                   <span className="absolute inline-flex">Digital</span> 
                   <span className="absolute inline-flex">Artifacts</span> 
@@ -175,7 +168,7 @@ export default function AboutPhilosophy() {
               </p>
 
               <div className="pt-8 border-t border-zinc-800 reveal-line">
-                <p className="font-playfair text-2xl text-zinc-300 italic">
+                <p className="font-serif text-2xl text-zinc-300 italic">
                   "The void is where we begin. Excellence is where we arrive."
                 </p>
               </div>

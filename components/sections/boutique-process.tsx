@@ -31,40 +31,83 @@ const STEPS = [
   },
 ];
 
-export default function BoutiqueProcess() {
-  const containerRef = useRef<HTMLDivElement>(null);
+interface ScrollTriggerConfig {
+  trigger?: HTMLElement | string | null;
+  start?: string;
+  end?: string;
+  scrub?: boolean | number;
+  markers?: boolean;
+  invalidateOnRefresh?: boolean;
+};
+
+export default function BoutiqueProcess(props: ScrollTriggerConfig) {
+  const containerRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const processRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const makeScrollTriggerConfig = (el: HTMLElement | null): ScrollTriggerConfig => ({
+    trigger: el, 
+    start: "center center", 
+    end: "center center", 
+    scrub: true, 
+    markers: false, 
+    invalidateOnRefresh: true, 
+    ...props,
+  });
+
   useGSAP(() => {
     const ctx = gsap.context(() => {
-      // Header Animation
-      gsap.to(".process-header", {
+      // Section Header Animation
+      gsap.to(headerRef.current, {
         y: 0,
         opacity: 1,
         duration: 1,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: ".process-header",
-          start: "top 90%",
-          toggleActions: "play none none none"
+          trigger: headerRef.current,
+          start: "top 80%",
+        }
+      });
+
+      // Intro Header Animation
+      gsap.to(introRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: introRef.current,
+          start: "top 80%",
+        }
+      });
+
+      // Process Container Animation
+      gsap.to(processRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.4,
+        scrollTrigger: {
+          trigger: processRef.current,
+          start: "top 80%",
         }
       });
 
       // Growing line animation
-      gsap.set(lineRef.current, { height: 0, width: 2 });
+      const processLineInitSize = "5%";
+      gsap.set(lineRef.current, { height: processLineInitSize });
       gsap.fromTo(
         lineRef.current,
-        { height: 0 },
+        { height: processLineInitSize },
         {
           height: "100%",
           ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 20%",
-            end: "bottom 80%",
-            scrub: true,
-          },
+          scrollTrigger: {...makeScrollTriggerConfig(containerRef.current)},
         }
       );
 
@@ -79,12 +122,15 @@ export default function BoutiqueProcess() {
           scrollTrigger: {
             trigger: step,
             start: "top 70%",
+            end: "bottom-=100 30%",
+            scrub: true,
+            markers: false,
           },
         });
 
         tl.from(dot, {
           scale: 0,
-          duration: 0.6,
+          duration: 0.5,
           ease: "back.out(2)",
         }).from(
           content,
@@ -105,11 +151,11 @@ export default function BoutiqueProcess() {
   return (
     <section
       ref={containerRef}
-      className="relative py-24 md:py-40 bg-background text-foreground overflow-hidden"
+      className="relative bg-background text-foreground overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 w-full flex flex-col">
         {/* Section Header */}
-        <div className="process-header w-full mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8 opacity-0 translate-y-8">
+        <div ref={headerRef} className="w-full mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8 opacity-0 translate-y-8">
           <div className="max-w-2xl">
             <span className="text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
               Process
@@ -118,15 +164,15 @@ export default function BoutiqueProcess() {
               Crafting Digital Masterpieces.
             </h2>
           </div>
-          <p className="max-w-md text-muted-foreground leading-relaxed text-sm md:text-right">
+          <p className="max-w-md text-muted-foreground leading-relaxed text-base md:text-right">
             We don't just build software; we sculpt digital
             experiences that resonate with elegance and purpose.
           </p>
         </div>
 
-        {/* Header */}
-        <div className="text-center mb-32 space-y-4">
-          <h2 className="text-4xl md:text-7xl font-sans italic">
+        {/* Intro Header */}
+        <div ref={introRef} className="text-center mb-32 space-y-4 translate-y-8 opacity-0">
+          <h2 className="text-4xl md:text-6xl font-sans font-normal tracking-tight italic">
             The Boutique Process
           </h2>
           <p className="text-zinc-500 uppercase tracking-[0.4em] text-sm">
@@ -137,16 +183,16 @@ export default function BoutiqueProcess() {
         {/* Timeline Container */}
         <div className="relative">
           {/* Vertical Central Line (Background) */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 w-px h-full bg-zinc-800" />
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 w-0 h-full border border-zinc-900" />
 
           {/* Animated Growing Line */}
           <div
             ref={lineRef}
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-px bg-foreground z-10 shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-0 h-0 border border-zinc-600 z-0 shadow-[0_0_15px_rgba(255,255,255,0.5)]"
           />
 
           {/* Steps */}
-          <div className="space-y-32 md:space-y-64">
+          <div ref={processRef} className="space-y-32 md:space-y-64 translate-y-8 opacity-0">
             {STEPS.map((step, index) => (
               <div
                 key={index}
@@ -161,10 +207,10 @@ export default function BoutiqueProcess() {
                   "w-full md:w-[45%] step-content",
                   index % 2 === 0 ? "text-right" : "text-left"
                 )}>
-                  <span className="text-zinc-500 font-mono text-sm mb-4 block">
+                  <span className="text-zinc-500 font-mono text-sm uppercase tracking-[0.4rem] mb-4 block">
                     Phase 0{index + 1}
                   </span>
-                  <h3 className="text-3xl md:text-4xl font-playfair mb-4">
+                  <h3 className="text-3xl md:text-4xl font-sans font-normal tracking-tighter mb-4">
                     {step.title}
                   </h3>
                   <p className="text-zinc-400 text-lg md:text-xl font-light leading-relaxed">

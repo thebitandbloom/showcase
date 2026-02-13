@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
       <MainNav />
-      <BoutiqueProcess />
+      <BoutiqueProcess {...{start: "center 80%", end: "bottom 80%", markers: false, scrub: 0.5}} />
       <Footer />
     </main>
   );

@@ -1,3 +1,5 @@
+'use client';
+
 import HeroShowcase from '@/components/sections/hero-showcase';
 import AboutPhilosophy from '@/components/sections/about-philosophy';
 import BoutiqueProcess from '@/components/sections/boutique-process';
@@ -7,14 +9,25 @@ import MarqueeScrollerAternative from '@/components/sections/marquee-scroller-al
 import ConciergeInquiry from '@/components/sections/concierge-inquiry';
 import MainNav from '@/components/layout/main-nav';
 import Footer from '@/components/layout/footer';
+import { useEffect } from 'react';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Home() {
+
+  useEffect(() => {
+    ScrollTrigger.refresh();
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    }
+  }, []);
+
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
       <MainNav />
       <HeroShowcase />
       <AboutPhilosophy />
-      <BoutiqueProcess />
+      <BoutiqueProcess {...{start: "center 80%", end: "bottom center", markers: false, scrub: 2 }} />
       <FeaturesGrid />
       <WorkGallery />
       <MarqueeScrollerAternative />

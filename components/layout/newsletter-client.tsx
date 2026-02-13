@@ -30,16 +30,37 @@ export default function NewsletterClient() {
   }
 
   return (
-    <form onSubmit={submit} className="w-full">
-      <label htmlFor="newsletter-email" className="text-sm font-medium text-zinc-300 block mb-2">Join our newsletter</label>
+    <form onSubmit={submit} className="w-full flex flex-col gap-2">
+      <label htmlFor="newsletter-email" 
+        className="uppercase tracking-widest text-xs font-semibold text-zinc-500">Join our newsletter</label>
       <div className="flex gap-2">
         <input
           id="newsletter-email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@company.com"
-          className="flex-1 w-1/3 bg-zinc-900 border border-zinc-800 px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
+          placeholder="YOU@COMPANY.COM"
+          className="
+            flex-1 w-1/3 
+            bg-zinc-900 
+            border 
+            border-zinc-800 
+            px-3 
+            py-2 
+            text-sm 
+            text-foreground 
+            focus:ring-1 
+            focus:outline-1 
+            focus:outline-foreground
+            focus:ring-foreground!
+            focus-visible:border-ring!
+            focus-visible:ring-ring/50!
+            focus-visible:ring-[3px]!
+            focus-visible:outline-none
+            transition-all 
+            rounded-none 
+            uppercase   
+          "
           aria-describedby="newsletter-status"
         />
         <button type="submit" className="bg-foreground text-background px-4 py-2 text-sm font-semibold">Subscribe</button>

@@ -33,20 +33,21 @@ const features = [
 
 export default function FeaturesGrid() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     // Filter out null refs
     const validCards = cardsRef.current.filter((card) => card !== null);
 
-    // Animate header
-    gsap.to(".features-header", {
+    // Section Header Animation
+    gsap.to(headerRef.current, {
       y: 0,
       opacity: 1,
       duration: 1,
       ease: "power3.out",
       scrollTrigger: {
-        trigger: ".features-header",
+        trigger: headerRef.current,
         start: "top 90%", // Start earlier for better feel
         toggleActions: "play none none none"
       }
@@ -70,12 +71,12 @@ export default function FeaturesGrid() {
   return (
     <section
       ref={containerRef}
-      className="w-full py-24 md:py-40 bg-background border-t border-foreground/5"
+      className="w-full bg-background border-t border-foreground/5"
       id="features"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="features-header mb-20 md:mb-32 max-w-2xl opacity-0 translate-y-8">
+        <div ref={headerRef} className="mb-20 md:mb-32 max-w-2xl opacity-0 translate-y-8">
           <span className="text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
             Capabilities
           </span>
@@ -115,7 +116,7 @@ export default function FeaturesGrid() {
               </div>
 
               {/* Subtle Bottom Accent */}
-              <div className="absolute bottom-0 left-0 h-px w-0 bg-foreground group-hover:w-full transition-all duration-700" />
+              <div className="absolute bottom-0 left-0 h-px w-0 bg-zinc-600 group-hover:w-full transition-all duration-700" />
             </div>
           ))}
         </div>

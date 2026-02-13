@@ -91,7 +91,7 @@ export default function WorkGallery() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-24 md:py-40 bg-background text-foreground" id="work">
+    <section ref={containerRef} className="bg-background text-foreground" id="work">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section Header */}
@@ -163,7 +163,7 @@ export default function WorkGallery() {
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500">{project.category}</span>
                         <span className="text-xs font-mono text-zinc-500">{project.year}</span>
                       </div>
-                      <DialogTitle className="text-4xl md:text-5xl font-sans italic text-foreground mb-6 leading-tight wrap-anywhere">
+                      <DialogTitle className="text-4xl md:text-5xl font-sans font-normal tracking-tight text-foreground mb-6 leading-tight wrap-anywhere">
                         {project.title}
                       </DialogTitle>
                       <DialogDescription className="text-lg text-zinc-400 leading-relaxed font-light">

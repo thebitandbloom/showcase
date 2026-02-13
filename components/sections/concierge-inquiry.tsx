@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { CalendarIcon, Loader2, CheckCircle2 } from 'lucide-react';
 import { IMaskInput } from 'react-imask';
 import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
 import { toast } from 'sonner';
 
@@ -39,6 +40,8 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -60,6 +63,7 @@ export default function ConciergeInquiry() {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const formContainerRef = useRef<HTMLDivElement>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,6 +81,7 @@ export default function ConciergeInquiry() {
   };
 
   const onError = (errors: any) => {
+    // console.log(Object.keys(errors))
     const first = Object.keys(errors || {})[0]
     if (first) {
       try {
@@ -115,12 +120,12 @@ export default function ConciergeInquiry() {
   };
 
   useGSAP(() => {
-    gsap.set("form-container", { opacity: 0, y: 40 });
-    gsap.set(".form-container", { visibility: "visible" });
+    gsap.set(formContainerRef.current, { opacity: 0, y: 40 });
+    gsap.set(formContainerRef.current, { visibility: "visible" });
 
-    gsap.from(".form-container", {
-      opacity: 0,
-      y: 40,
+    gsap.to(formContainerRef.current, {
+      y: 0,
+      opacity: 1,
       duration: 1,
       ease: "power3.out",
       scrollTrigger: {
@@ -131,9 +136,9 @@ export default function ConciergeInquiry() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-24 md:py-40 bg-background border-t border-foreground/5" id="inquiry">
+    <section ref={containerRef} className="w-full bg-background border-t border-foreground/5" id="inquiry">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="form-container invisible">
+        <div ref={formContainerRef} className="form-container invisible">
           <div className="mb-16 text-center">
             <span className="text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4 block">
               Concierge Service
@@ -157,7 +162,26 @@ export default function ConciergeInquiry() {
                     <FormItem>
                       <FormLabel className="uppercase tracking-widest text-xs font-semibold text-zinc-500">Full Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="JEAN DOE" {...field} className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-foreground transition-all rounded-none py-6 uppercase" />
+                        <Input 
+                          placeholder="JEAN DOE" 
+                          {...field} 
+                          className="
+                            bg-zinc-950 
+                            border-zinc-800 
+                            focus:ring-1 
+                            focus:outline-1 
+                            focus:outline-foreground
+                            focus:ring-foreground!
+                            focus-visible:border-ring!
+                            focus-visible:ring-ring/50!
+                            focus-visible:ring-[3px]!
+                            focus-visible:outline-none
+                            transition-all 
+                            rounded-none 
+                            py-6 
+                            uppercase
+                          " 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -172,7 +196,26 @@ export default function ConciergeInquiry() {
                     <FormItem>
                       <FormLabel className="uppercase tracking-widest text-xs font-semibold text-zinc-500">Email Address</FormLabel>
                       <FormControl>
-                        <Input placeholder="HELLO@AGENCY.COM" {...field} className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-foreground transition-all rounded-none py-6 uppercase" />
+                        <Input 
+                          placeholder="HELLO@COMPANY.COM" 
+                          {...field} 
+                          className="
+                            bg-zinc-950 
+                            border-zinc-800 
+                            focus:ring-1 
+                            focus:outline-1 
+                            focus:outline-foreground
+                            focus:ring-foreground!
+                            focus-visible:border-ring!
+                            focus-visible:ring-ring/50!
+                            focus-visible:ring-[3px]!
+                            focus-visible:outline-none
+                            transition-all 
+                            rounded-none 
+                            py-6 
+                            uppercase
+                          " 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -193,10 +236,47 @@ export default function ConciergeInquiry() {
                             '#': /[1-9]/,
                           }}
                           placeholder="(00) 00000-0000"
+                          {...field}
                           value={field.value}
                           onAccept={(value) => field.onChange(value)}
-                          className="flex h-12 w-full border border-zinc-800 bg-zinc-950 px-3 py-6 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-600 focus-visible:outline-none focus:ring-1 focus:ring-foreground transition-all rounded-none uppercase disabled:cursor-not-allowed disabled:opacity-50"
+                          className="
+                            flex h-12 
+                            w-full 
+                            border 
+                            border-zinc-800 
+                            bg-zinc-950 
+                            px-3 py-6 
+                            .text-sm 
+                            placeholder:text-zinc-600 
+                            outline-0
+                            focus:outline-1 
+                            focus:outline-foreground
+                            focus:ring-foreground!
+                            focus-visible:border-ring!
+                            focus-visible:ring-ring/50!
+                            focus-visible:ring-[3px]!
+                            focus-visible:outline-none
+                            aria-invalid:ring-destructive/20 
+                            aria-invalid:border-destructive
+                            dark:aria-invalid:ring-destructive/40 
+                            file:border-0 
+                            file:bg-transparent 
+                            file:text-sm 
+                            file:font-medium 
+                            disabled:cursor-not-allowed 
+                            disabled:opacity-50 
+                            disabled:pointer-events-none
+                            transition-all 
+                            rounded-none 
+                            uppercase
+                          "
                         />
+                        {/* Note: IMaskInput doesn't directly integrate with react-hook-form, so we handle the value and onChange manually. */}
+                        {/* We add a custom validation message for the phone field in the schema to ensure it meets the required format. */}
+                        {/* The zod schema will check for a minimum length to ensure the phone number is complete, and the mask will guide the user to enter it in the correct format. */}
+                        {/* The placeholder and mask will help users input their phone number correctly, while the validation will ensure that incomplete numbers are not accepted. */}
+                        {/* This approach allows us to maintain a consistent user experience while ensuring data integrity for the phone number field. */}
+                        {/* We also add a custom css to keep <IMaskInput> similar behavior to the Shadcn UI <Input> element. Some customization were extended to other fields in the form, providing a consistent experience*/}
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -245,12 +325,16 @@ export default function ConciergeInquiry() {
                             <Button
                               variant={"outline"}
                               className={cn(
-                                "w-full md:w-70 py-6 bg-zinc-950 border-zinc-800 rounded-none text-left font-normal uppercase tracking-widest text-xs",
-                                !field.value && "text-zinc-600"
+                                "w-full md:w-70 py-6 bg-zinc-950 border-zinc-800 rounded-none text-left font-normal uppercase tracking-widest .text-xs",
+                                !field.value && "text-zinc-600" && 
+                                `
+                                  hover:border-zinc-800!
+                                  active:border-zinc-800!
+                                `
                               )}
                             >
                               {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              <CalendarIcon className="ml-auto h-4 w-full opacity-50" />
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
@@ -282,7 +366,21 @@ export default function ConciergeInquiry() {
                       <FormControl>
                         <Textarea
                           placeholder="DESCRIBE YOUR VISION..."
-                          className="bg-zinc-950 border-zinc-800 focus:ring-1 focus:ring-foreground transition-all rounded-none min-h-37.5 uppercase"
+                          className="
+                            bg-zinc-950 
+                            border-zinc-800 
+                            focus:ring-1 
+                            focus:outline-1 
+                            focus:outline-foreground
+                            focus:ring-foreground!
+                            focus-visible:border-ring!
+                            focus-visible:ring-ring/50!
+                            focus-visible:ring-[3px]!
+                            focus-visible:outline-none
+                            transition-all 
+                            rounded-none 
+                            min-h-37.5 
+                            uppercase"
                           {...field}
                         />
                       </FormControl>
@@ -306,7 +404,7 @@ export default function ConciergeInquiry() {
       <Dialog open={isReviewOpen} onOpenChange={setIsReviewOpen}>
         <DialogContent className="bg-zinc-950 border-zinc-800 text-foreground max-w-xl rounded-none">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-sans italic font-bold mb-2">Review Your Inquiry</DialogTitle>
+            <DialogTitle className="text-3xl font-sans font-normal tracking-tight mb-2">Review Your Inquiry</DialogTitle>
             <DialogDescription className="text-zinc-500">
               Please verify your information before we finalize the request.
             </DialogDescription>
